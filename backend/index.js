@@ -13,7 +13,10 @@ const io = socketio(server);
 app.use(router);
 
 io.on('connection', (socket) => {
-	console.log('A user has connected!');
+	socket.on('join', (arg, callback) => {
+		console.log(`User ${arg.name} has connected to room ${arg.room}!`);
+		callback('got it');
+	});
 
 	socket.on('disconnect', () => {
 		console.log('A user has disconnected!');
